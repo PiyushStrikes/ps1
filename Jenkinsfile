@@ -13,7 +13,7 @@ pipeline {
         stage('dev') {
              when { branch 'dev'}
             steps {
-                echo 'hello world'
+                echo 'dev  changes'
             }
         }
         stage('uat') {
