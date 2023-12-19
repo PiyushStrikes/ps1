@@ -17,7 +17,7 @@ pipeline {
             }
         }
         stage('uat') {
-            when { branch '*/uat'}
+            when { branch 'uat'}
             agent {
                 docker { image 'node:16-alpine' }
             }
