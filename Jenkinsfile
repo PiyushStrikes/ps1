@@ -16,13 +16,19 @@ pipeline {
                 echo 'dev  changes'
             }
         }
-        stage('uat') {
-            when { branch 'uat'}
-            agent {
-                docker { image 'node:16-alpine' }
-            }
+        // stage('uat') {
+        //     when { branch 'uat'}
+        //     agent {
+        //         docker { image 'node:16-alpine' }
+        //     }
+        //     steps {
+        //         sh 'node --version'
+        //     }
+        // }
+
+        stage('print') {
             steps {
-                sh 'node --version'
+                echo " testing..."
             }
         }
     }
