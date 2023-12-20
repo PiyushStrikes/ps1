@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    git branch: 'main', credentialsId: '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', url: 'https://github.com/piyushLiferay/ps1.git'
+                    git branch: 'main', credentialsId: 'secret-text', url: 'https://github.com/piyushLiferay/ps1.git'
                 }
                 echo "checkout"
             }
@@ -34,6 +34,56 @@ pipeline {
 
 // when { branch '*/master'}
 
+// when { changeset "dev/**" }
+
 /*
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    checkout scm
+                }
+            }
+        }
+
+        stage('dev') {
+            when {
+                expression { 
+                    return env.CHANGE_BRANCH == 'dev'
+                }
+            }
+            steps {
+                echo "dev branch"
+            }
+        }
+
+        stage('UAT') {
+            when {
+                expression { 
+                    return env.CHANGE_BRANCH == 'uat'
+                }
+            }
+            steps {
+                echo "uat branch"
+            }
+        }
+
+    }
+
+    post {
+        success {
+            echo 'Build and test successful!'
+        }
+        failure {
+            echo 'Build or test failed.'
+        }
+    }
+}
+
+
 
 */
