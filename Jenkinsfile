@@ -2,19 +2,22 @@ pipeline {
     agent any
 
     stages {
-        stage('test') {
-             when {
-                expression {
-                    BRANCH_NAME == 'dev' 
-                }
-            }
+        stage('Checkout') {
             steps {
-                echo 'hello world'
-                git 'https://github.com/piyushLiferay/ps1.git'
-                
+                script {
+                    git branch: 'main', credentialsId: 'secret-text', url: 'https://github.com/piyushLiferay/ps1.git'
+                }
+                echo "checkout"
             }
         }
-        stage('build') {
+        stage('dev') {
+             when { branch 'dev'}
+            steps {
+                echo 'dev  changes'
+            }
+        }
+        stage('main') {
+            when { branch 'main'}
             agent {
                 docker { image 'node:16-alpine' }
             }
@@ -22,5 +25,11 @@ pipeline {
                 sh 'node --version'
             }
         }
-    }
 
+        stage('print') {
+            steps {
+                echo " testing..."
+            }
+        }
+    }
+}
